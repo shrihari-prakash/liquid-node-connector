@@ -4,9 +4,7 @@ A Node.js connector library to integrate your microservices with [Liquid](https:
 
 > **_NOTE:_** This project is in very early stages. Functionality might be limited.
 
-### Usage
-
-#### Installation
+### Installation
 
 Run `npm i liquid-node-connector`.
 ### Usage
