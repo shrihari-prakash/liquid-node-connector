@@ -1,0 +1,20 @@
+{
+  "name": "liquid-node-connector",
+  "version": "1.0.0",
+  "description": "Node connector for interacting with Liquid serivices.",
+  "main": "index.js",
+  "typings": "index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shrihari-prakash/liquid-node-connector.git"
+  },
+  "author": "Shrihari Prakash",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shrihari-prakash/liquid-node-connector/issues"
+  },
+  "homepage": "https://github.com/shrihari-prakash/liquid-node-connector#readme"
+}
