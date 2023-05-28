@@ -1,6 +1,6 @@
 ## Liquid Node Connector
 
-A Node connector library to integrate your microservices with [Liquid](https://github.com/shrihari-prakash/liquid) authentication services.
+A Node.js connector library to integrate your microservices with [Liquid](https://github.com/shrihari-prakash/liquid) authentication services.
 
 > **_NOTE:_** This project is in very early stages. Functionality might be limited.
 
