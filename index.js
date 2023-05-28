@@ -18,7 +18,7 @@ class LiquidConnector {
         this.clientSecret = clientSecret;
         this.host = host;
         if (cacheOptions) {
-            this.cachePrefix = `liquid_node_connector.`;
+            this.cachePrefix = `liquid_node_connector:`;
             this.cacheClient = cacheOptions.client;
             this.cacheExpiry = cacheOptions.expire || 300; // 5 minutes default
         }
@@ -29,11 +29,15 @@ class LiquidConnector {
         if (!token) {
             throw new UnauthorizedError();
         };
-        const cacheKey = `${this.cachePrefix}${token}`;
-        if (this.redisClient) {
-            const userInfo = await this.redisClient.get(cacheKey);
-            if (userInfo) {
-                return JSON.parse(userInfo);
+        const cacheKey = `${this.cachePrefix}token:${token}`;
+        if (this.cacheClient) {
+            let cacheResult = await this.cacheClient.get(cacheKey);
+            if (cacheResult) {
+                cacheResult = JSON.parse(cacheResult);
+                this.logger.debug(`Returning response from cache for ${cacheKey}`);
+                if (cacheResult.ok === 1) {
+                    return cacheResult.data.user;
+                }
             }
         }
         const api = `${this.host}/user/me`;
@@ -41,17 +45,18 @@ class LiquidConnector {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
         };
-        const res = await fetch(api, { headers });
-        const data = await res.json();
-        if (res.status !== 200 || !data.ok) {
+        const response = await fetch(api, { headers });
+        const result = await response.json();
+        if (this.cacheClient) {
+            result.cacheTime = +new Date();
+            const cacheData = JSON.stringify(result);
+            await this.cacheClient.set(cacheKey, cacheData, "EX", this.cacheExpiry);
+            this.logger.debug(`Cache written for ${cacheKey}`);
+        }
+        if (response.status !== 200 || !result.ok) {
             throw new UnauthorizedError();
         }
-        const user = data.data.user;
-        if (this.redisClient) {
-            const cacheData = JSON.stringify(data);
-            await this.redisClient.set(cacheKey, cacheData, "EX", this.cacheExpiry);
-            this.logger.debug(`User data for ${user._id} cached.`)
-        }
+        const user = result.data.user;
         return user;
     }
 }

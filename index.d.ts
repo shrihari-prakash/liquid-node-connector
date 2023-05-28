@@ -7,16 +7,17 @@ interface CacheOptions {
   expire: number;
 }
 
-interface LoggerOptions {
-  logger: any;
-}
-
 interface ConnectorOptions {
   host: string;
   clientId: string;
   clientSecret: string;
   cacheOptions?: CacheOptions;
-  loggerOptions?: LoggerOptions;
+  logger?: {
+    debug: any;
+    info: any;
+    warn: any;
+    error: any;
+  };
 }
 
 class UnauthorizedError extends Error {
