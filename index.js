@@ -1,7 +1,7 @@
-class UnauthorizedError extends Error {
+class LiquidUnauthorizedError extends Error {
     constructor(message) {
         super(message);
-        this.name = 'UnauthorizedError';
+        this.name = 'LiquidUnauthorizedError';
     }
 }
 
@@ -27,7 +27,7 @@ class LiquidConnector {
 
     async authenticate(token) {
         if (!token) {
-            throw new UnauthorizedError();
+            throw new LiquidUnauthorizedError();
         };
         const cacheKey = `${this.cachePrefix}token:${token}`;
         if (this.cacheClient) {
@@ -54,7 +54,7 @@ class LiquidConnector {
             this.logger.debug(`Cache written for ${cacheKey}`);
         }
         if (response.status !== 200 || !result.ok) {
-            throw new UnauthorizedError();
+            throw new LiquidUnauthorizedError();
         }
         const user = result.data.user;
         return user;
