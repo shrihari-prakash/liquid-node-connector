@@ -2,7 +2,7 @@
 
 > **_NOTE:_** This project is in very early stages. Functionality might be limited.
 
-The library requires Node version 18 or above.
+This library requires Node version 18 or above.
 
 ### Documentation
 
