@@ -37,6 +37,8 @@ class LiquidConnector {
                 this.logger.debug(`Returning response from cache for ${cacheKey}`);
                 if (cacheResult.ok === 1) {
                     return cacheResult.data.user;
+                } else {
+                    throw new LiquidUnauthorizedError();
                 }
             }
         }
