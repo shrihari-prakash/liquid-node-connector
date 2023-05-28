@@ -10,7 +10,7 @@
 import LiquidConnector from "liquid-node-connector";
 
 const liquidConnector = new LiquidConnector({
-  host: "domain_of_your_liquid_instance",
+  host: "host_address_of_your_liquid_instance",
   clientId: "your_liquid_client_id",
   clientSecret: "your_liquid_client_secret",
   // Optional
