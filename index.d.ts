@@ -25,7 +25,7 @@ class UnauthorizedError extends Error {
 
 declare module "liquid-node-connector" {
   export default class LiquidConnector {
-    constructor(ConnectorOptions);
+    constructor(options: ConnectorOptions);
     authenticate(token: string): Promise<UserInfo>;
   }
 }
