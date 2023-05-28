@@ -34,5 +34,5 @@ const user = await liquidConnector.authenticate(token);
 
 ```js
 const { accessToken } = await liquidConnector.getAccessToken();
-// Make APIs that requires client authentication.
+// Make APIs calls that requires client authentication.
 ```
