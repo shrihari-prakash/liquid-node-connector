@@ -15,7 +15,7 @@ const liquidConnector = new LiquidConnector({
   clientSecret: "your_liquid_client_secret",
   // Optional
   cacheOptions: {
-    redisClient: IORedisClient,
+    client: RedisClient,
     expire: 300, // 5 minutes
   },
   // Optional

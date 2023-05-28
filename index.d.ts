@@ -3,7 +3,7 @@ interface UserInfo {
 }
 
 interface CacheOptions {
-  redisClient: any;
+  client: any;
   expire: number;
 }
 

@@ -19,7 +19,7 @@ class LiquidConnector {
         this.host = host;
         if (cacheOptions) {
             this.cachePrefix = `liquid_node_connector.`;
-            this.redisClient = cacheOptions.redisClient;
+            this.cacheClient = cacheOptions.client;
             this.cacheExpiry = cacheOptions.expire || 300; // 5 minutes default
         }
         this.logger = logger || new Logger();
