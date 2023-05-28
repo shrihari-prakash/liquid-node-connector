@@ -13,7 +13,7 @@ class Logger {
 }
 
 class LiquidConnector {
-    constructor({ host, clientId, clientSecret, cacheOptions, loggerOptions }) {
+    constructor({ host, clientId, clientSecret, cacheOptions, logger }) {
         this.clientId = clientId;
         this.clientSecret = clientSecret;
         this.host = host;
@@ -22,7 +22,7 @@ class LiquidConnector {
             this.redisClient = cacheOptions.redisClient;
             this.cacheExpiry = cacheOptions.expire || 300; // 5 minutes default
         }
-        this.logger = loggerOptions ? loggerOptions.logger : new Logger();
+        this.logger = logger || new Logger();
     }
 
     async authenticate(token) {
@@ -37,17 +37,13 @@ class LiquidConnector {
             }
         }
         const api = `${this.host}/user/me`;
-        const res = await fetch(api, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },
-        });
+        const headers = {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        };
+        const res = await fetch(api, { headers });
         const data = await res.json();
-        if (res.status !== 200) {
-            throw new UnauthorizedError();
-        }
-        if (!data.ok) {
+        if (res.status !== 200 || !data.ok) {
             throw new UnauthorizedError();
         }
         const user = data.data.user;
