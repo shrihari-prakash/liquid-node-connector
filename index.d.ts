@@ -2,6 +2,11 @@ interface UserInfo {
   [key: string]: any;
 }
 
+interface TokenResponse {
+  accessToken: string;
+  accessTokenExpiry: number;
+}
+
 interface CacheOptions {
   client: any;
   expire: number;
@@ -28,5 +33,6 @@ declare module "liquid-node-connector" {
   export default class LiquidConnector {
     constructor(options: ConnectorOptions);
     authenticate(token: string): Promise<UserInfo>;
+    getAccessToken(): Promise<TokenResponse>;
   }
 }
