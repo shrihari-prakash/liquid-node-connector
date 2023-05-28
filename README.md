@@ -27,5 +27,12 @@ const liquidConnector = new LiquidConnector({
 
 ```js
 const user = await liquidConnector.authenticate(token);
-// Now use this user info for the rest of your logic
+// Now use this user info for the rest of your logic.
+```
+
+#### Get access token for the client initialized
+
+```js
+const { accessToken } = await liquidConnector.getAccessToken();
+// Make APIs that requires client authentication.
 ```
