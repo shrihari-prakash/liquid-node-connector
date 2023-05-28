@@ -1,31 +1,3 @@
-class LiquidForbiddenError extends Error {
-    constructor(message) {
-        super(message);
-        this.name = 'LiquidForbiddenError';
-    }
-}
-
-class LiquidUnauthorizedError extends Error {
-    constructor(message) {
-        super(message);
-        this.name = 'LiquidUnauthorizedError';
-    }
-}
-
-class LiquidNetworkError extends Error {
-    constructor(message) {
-        super(message);
-        this.name = 'LiquidNetworkError';
-    }
-}
-
-class Logger {
-    debug() { null }
-    info() { null }
-    warn() { null }
-    error() { null }
-}
-
 class LiquidConnector {
     accessToken = null;
     accessTokenExpiry = new Date(0);
@@ -122,6 +94,34 @@ class LiquidConnector {
             accessTokenExpiry: this.accessTokenExpiry
         }
     }
+}
+
+class LiquidForbiddenError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = 'LiquidForbiddenError';
+    }
+}
+
+class LiquidUnauthorizedError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = 'LiquidUnauthorizedError';
+    }
+}
+
+class LiquidNetworkError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = 'LiquidNetworkError';
+    }
+}
+
+class Logger {
+    debug() { null }
+    info() { null }
+    warn() { null }
+    error() { null }
 }
 
 module.exports = LiquidConnector;
