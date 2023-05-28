@@ -12,6 +12,13 @@ class LiquidUnauthorizedError extends Error {
     }
 }
 
+class LiquidNetworkError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = 'LiquidNetworkError';
+    }
+}
+
 class Logger {
     debug() { null }
     info() { null }
@@ -57,7 +64,12 @@ class LiquidConnector {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
         };
-        const response = await fetch(api, { headers });
+        let response;
+        try {
+            response = await fetch(api, { headers });
+        } catch {
+            throw new LiquidNetworkError();
+        }
         const result = await response.json();
         if (this.cacheClient) {
             result.cacheTime = +new Date();
@@ -84,11 +96,16 @@ class LiquidConnector {
             body.append('grant_type', 'client_credentials');
             body.append('client_id', this.clientId);
             body.append('client_secret', this.clientSecret);
-            const response = await fetch(api, {
-                method: 'POST',
-                headers,
-                body
-            });
+            let response;
+            try {
+                response = await fetch(api, {
+                    method: 'POST',
+                    headers,
+                    body
+                });
+            } catch {
+                throw new LiquidNetworkError();
+            }
             if (response.status !== 200) {
                 throw new LiquidUnauthorizedError();
             }
