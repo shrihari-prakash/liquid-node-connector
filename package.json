@@ -1,6 +1,6 @@
 {
   "name": "liquid-node-connector",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Node connector for interacting with Liquid serivices.",
   "main": "index.js",
   "typings": "index.d.ts",
