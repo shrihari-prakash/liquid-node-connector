@@ -60,7 +60,7 @@ class LiquidConnector {
       return user;
     } catch (error) {
       this.logger.error(error);
-      throw new CustomError('UnknownError', '500');
+      throw new CustomError('UnknownError', 500);
     }
   }
 
@@ -104,7 +104,7 @@ class LiquidConnector {
       };
     } catch (error) {
       this.logger.error(error);
-      throw new CustomError('UnknownError', '500');
+      throw new CustomError('UnknownError', 500);
     }
   }
 }
