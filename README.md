@@ -28,14 +28,14 @@ const liquidConnector = new LiquidConnector({
 });
 ```
 
-#### Authenticate a user
+#### Authenticate a user connecting to your microservice
 
 ```js
 const user = await liquidConnector.authenticate(token);
 // Now use this user info for the rest of your logic.
 ```
 
-#### Get access token for the client initialized
+#### Get access token for accessing client level APIs
 
 ```js
 const { accessToken } = await liquidConnector.getAccessToken();
